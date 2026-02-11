@@ -254,7 +254,7 @@
       }
 
       yesBtn.onclick = () => {
-        bgMusic.play(); // 🎵 start music
+        bgMusic.play().catch(()=>{});
         screen1.classList.add("hidden");
         screen2.classList.remove("hidden");
         startFlowers();
@@ -370,3 +370,4 @@
     </script>
   </body>
 </html>
+
