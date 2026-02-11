@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>For My Love ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .card {
+        width: 370px;
+        background: #fff;
+        border-radius: 25px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      h1,
+      h2 {
+        color: #ff4d6d;
+      }
+
+      button {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 30px;
+        font-size: 15px;
+        margin: 8px;
+        cursor: pointer;
+      }
+      .yes {
+        background: #ff4d6d;
+        color: #fff;
+      }
+
+      .gifts {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+      }
+      .gift {
+        width: 80px;
+        height: 80px;
+        background: #ff4d6d;
+        border-radius: 15px;
+        color: #fff;
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* QUIZ OPTION */
+      .option {
+        display: block;
+        width: 100%;
+        background: #ffe6ec;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option.selected {
+        border: 2px solid #ff4d6d;
+        box-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+        transform: scale(1.03);
+      }
+
+      /* Flower */
+      .flower {
+        position: fixed;
+        top: -40px;
+        font-size: 20px;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+
+      /* Heart Game */
+      #gameArea {
+        position: relative;
+        height: 300px;
+        background: #ffe6ec;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      #heart {
+        position: absolute;
+        font-size: 40px;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      /* Letter */
+      .letter {
+        font-family: "Dancing Script", cursive;
+        font-size: 18px;
+        text-align: left;
+        line-height: 1.6;
+        color: #444;
+      }
+    </style>
+  </head>
+
+  <body>
+    <audio id="bgMusic" loop>
+      <source
+        src="Varanam Ayiram Harris Annul Mele Ringtone Arjun_edits.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <div class="card">
+      <!-- SCREEN 1 -->
+      <div id="screen1">
+        <h1>Will you be mine AMMU? 💖</h1>
+        <div style="position: relative; height: 120px">
+          <button id="yesBtn" class="yes">Yes ❤️</button>
+          <button>No 😌</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 2 -->
+      <div id="screen2" class="hidden">
+        <h1>Happy Valentine’s Day Chella Kutty ❤️</h1>
+        <button class="yes" onclick="goToGifts()">See My Gift 🎁</button>
+      </div>
+
+      <!-- SCREEN 3 -->
+      <div id="screen3" class="hidden">
+        <h2>Choose Your Gift 🎁</h2>
+        <div class="gifts">
+          <div class="gift" onclick="openQuiz()">🎮</div>
+          <div class="gift" onclick="openLetter()">💌</div>
+          <div class="gift" onclick="openGame()">💗</div>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <div id="quiz" class="hidden">
+        <h2>Quiz Only For You Ma 😄</h2>
+        <p id="qText"></p>
+        <div id="options"></div>
+        <button class="yes" onclick="nextQ()">Next ➡</button>
+        <button onclick="back()">⬅ Back</button>
+      </div>
+
+      <!-- LETTER -->
+      <div id="letter" class="hidden">
+        <h2>My Love 💌</h2>
+        <div class="letter">
+          My love,<br /><br />
+          Loving you has been the most beautiful part of my life. You came into
+          my world quietly, but you changed everything within me. With you, even
+          the simplest moments feel meaningful.<br /><br />
+
+          You are my comfort on hard days, my smile on ordinary ones, and my
+          peace in every storm. I don’t promise perfection, but I promise
+          honesty, respect, and a love that chooses you every single day.<br /><br />
+
+          No matter where life takes us, my heart will always find its way back
+          to you.<br /><br />
+
+          Forever yours ❤️
+        </div>
+        <button onclick="back()">⬅ Back</button>
+      </div>
+
+      <!-- HEART GAME -->
+      <div id="game" class="hidden">
+        <h2>Catch My Heart 💗</h2>
+        <p>Ammu Try to catch it 😝</p>
+        <div id="gameArea">
+          <div id="heart">💗</div>
+        </div>
+        <button onclick="back()">⬅ Back</button>
+      </div>
+
+      <!-- SURPRISE -->
+      <div id="surprise" class="hidden">
+        <h2>One More Surprise 😳💖</h2>
+        <div class="letter">
+          Will you always be mine and keep my heart safe forever? 💍❤️
+        </div>
+        <button class="yes" onclick="finalMessage()">Yes, always ❤️</button>
+      </div>
+
+      <!-- FINAL MESSAGE -->
+      <div id="message" class="hidden">
+        <h2>You Caught My Heart ❤️</h2>
+        <div class="letter">
+          You finally caught my heart… I tried to run because I was scared, but
+          the truth is— my heart always wanted to be with you. From today, it’s
+          yours. Please keep it safe… forever ❤️
+        </div>
+        <button onclick="back()">⬅ Back</button>
+      </div>
+    </div>
+
+    <script>
+      // GET ELEMENTS PROPERLY
+      const bgMusic = document.getElementById("bgMusic");
+      const screen1 = document.getElementById("screen1");
+      const screen2 = document.getElementById("screen2");
+      const screen3 = document.getElementById("screen3");
+      const quiz = document.getElementById("quiz");
+      const letter = document.getElementById("letter");
+      const game = document.getElementById("game");
+      const surprise = document.getElementById("surprise");
+      const message = document.getElementById("message");
+      const yesBtn = document.getElementById("yesBtn");
+      const heart = document.getElementById("heart");
+      const qText = document.getElementById("qText");
+      const options = document.getElementById("options");
+
+      // FLOWERS
+      function startFlowers() {
+        for (let i = 0; i < 25; i++) {
+          let f = document.createElement("div");
+          f.className = "flower";
+          f.innerHTML = "🌸";
+          f.style.left = Math.random() * 100 + "vw";
+          f.style.animationDuration = 5 + Math.random() * 5 + "s";
+          document.body.appendChild(f);
+        }
+      }
+
+      yesBtn.onclick = () => {
+        bgMusic.play(); // 🎵 start music
+        screen1.classList.add("hidden");
+        screen2.classList.remove("hidden");
+        startFlowers();
+      };
+
+      yesBtn.onmouseover = () => {
+        yesBtn.style.position = "absolute";
+        yesBtn.style.left = Math.random() * 200 + "px";
+        yesBtn.style.top = Math.random() * 70 + "px";
+      };
+
+      // NAVIGATION
+      function goToGifts() {
+        screen2.classList.add("hidden");
+        screen3.classList.remove("hidden");
+      }
+
+      function back() {
+        screen2.classList.add("hidden");
+        quiz.classList.add("hidden");
+        letter.classList.add("hidden");
+        game.classList.add("hidden");
+        surprise.classList.add("hidden");
+        message.classList.add("hidden");
+        screen3.classList.remove("hidden");
+      }
+
+      // OPEN LETTER (FIXED)
+      function openLetter() {
+        screen3.classList.add("hidden");
+        letter.classList.remove("hidden");
+      }
+
+      // QUIZ
+      const questions = [
+        {
+          q: "Who loves us more?",
+          o: ["You 😌", "Always You 😍", "Only You ❤️"],
+        },
+        { q: "Our future?", o: ["Together", "Forever", "Always"] },
+        { q: "Who is my happiness?", o: ["Me", "Only Me", "Always Me"] },
+      ];
+
+      let qi = 0;
+      let selected = false;
+
+      function openQuiz() {
+        screen3.classList.add("hidden");
+        quiz.classList.remove("hidden");
+        qi = 0;
+        loadQ();
+      }
+
+      function loadQ() {
+        selected = false;
+        qText.innerText = questions[qi].q;
+        options.innerHTML = "";
+        questions[qi].o.forEach((text) => {
+          let d = document.createElement("div");
+          d.className = "option";
+          d.innerText = text;
+          d.onclick = () => {
+            document
+              .querySelectorAll(".option")
+              .forEach((o) => o.classList.remove("selected"));
+            d.classList.add("selected");
+            selected = true;
+          };
+          options.appendChild(d);
+        });
+      }
+
+      function nextQ() {
+        if (!selected) {
+          alert("Please choose one ❤️");
+          return;
+        }
+        qi++;
+        if (qi < questions.length) {
+          loadQ();
+        } else {
+          quiz.innerHTML =
+            "<h2>Quiz Completed 😍</h2><p>Love You Soo Much Ma ❤️</p><button onclick='back()'>⬅ Back</button>";
+        }
+      }
+
+      // HEART GAME
+      let speed = 700;
+
+      function openGame() {
+        screen3.classList.add("hidden");
+        game.classList.remove("hidden");
+        speed = 700;
+        moveHeart();
+      }
+
+      function moveHeart() {
+        heart.style.left = Math.random() * 240 + "px";
+        heart.style.top = Math.random() * 240 + "px";
+        speed = Math.max(200, speed - 50);
+        setTimeout(moveHeart, speed);
+      }
+
+      heart.onclick = () => {
+        game.classList.add("hidden");
+        surprise.classList.remove("hidden");
+      };
+
+      function finalMessage() {
+        surprise.classList.add("hidden");
+        message.classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
